@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using System.Security.Permissions;
+using System.Runtime.InteropServices;
 
 namespace Deplorer
 {
@@ -49,8 +51,8 @@ namespace Deplorer
 
             int result = DateTime.Compare(DateTime.Now, selTime);
 
-            string strSource = "C:\\Staging\\Receiving Insp FE  1.4.accdb";
-            string strDest = "C:\\Staging\\Receiving Insp FE.accdb";
+            string strSource = @"C:\Staging\Receiving Insp FE  1.4.accdb";
+            string strDest = @"C:\Staging\Receiving Insp FE.accdb";
 
             if (result == 1)
             {
@@ -121,6 +123,58 @@ namespace Deplorer
                 xDoc.Save("C:\\Staging\\myFile.xml");
             }
 
+        }
+
+        private void btnFileDeleted_Click(object sender, EventArgs e)
+        {
+            string fileName;
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                fileName = openFileDialog1.FileName;
+                //txtFileToWatch.Text = fileName + fileName.Substring(fileName.LastIndexOf("\\") + 1);
+                txtFileToWatch.Text = fileName;
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            //fileSystemWatcher1.Path = txtFileToWatch.Text;
+            fileSystemWatcher1.Path = @"C:\Staging\";
+            fileSystemWatcher1.Filter = @"New Text Document.txt";
+
+            fileSystemWatcher1.Deleted += new FileSystemEventHandler(OnChanged);
+        }
+
+        private void OnChanged(object source, FileSystemEventArgs e)
+        {
+            // Specify what is done when a file is deleted.
+            //string strSource = @"C:\Staging\Receiving Insp FE  1.4.accdb";
+            string strSource = @txtSource.Text;
+
+            //string strDest = @"C:\Staging\Receiving Insp FE.accdb";
+            string strDest = @txtDestPath.Text + @"\" + @txtDestFile.Text ;
+
+            //Trigger the event here
+            File.Copy(strSource, strDest, true);
+            lblTimeMatch.Text = "File Coppied";
+            
+        }
+
+        [DllImport("winmm.dll", EntryPoint = "mciSendStringA", CharSet = CharSet.Ansi)]
+        protected static extern int mciSendString(string lpstrCommand,
+        StringBuilder lpstrReturnString,
+        int uReturnLength,
+        IntPtr hwndCallback);
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            int ret = mciSendString("Set cdaudio door open", null, 0, IntPtr.Zero);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            int ret = mciSendString("set cdaudio door closed", null, 0, IntPtr.Zero);
         }
     }
 }

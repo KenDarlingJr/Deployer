@@ -45,6 +45,13 @@
             this.button4 = new System.Windows.Forms.Button();
             this.txtDestFile = new System.Windows.Forms.TextBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.btnFileDeleted = new System.Windows.Forms.Button();
+            this.txtFileToWatch = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.btnOpen = new System.Windows.Forms.Button();
+            this.btnClose = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblCurrentTime
@@ -92,7 +99,7 @@
             this.btnSelectTime.Name = "btnSelectTime";
             this.btnSelectTime.Size = new System.Drawing.Size(100, 23);
             this.btnSelectTime.TabIndex = 4;
-            this.btnSelectTime.Text = "button1";
+            this.btnSelectTime.Text = "@ Date/Time";
             this.btnSelectTime.UseVisualStyleBackColor = true;
             this.btnSelectTime.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -169,11 +176,68 @@
             this.txtDestFile.Size = new System.Drawing.Size(319, 20);
             this.txtDestFile.TabIndex = 16;
             // 
+            // fileSystemWatcher1
+            // 
+            this.fileSystemWatcher1.EnableRaisingEvents = true;
+            this.fileSystemWatcher1.SynchronizingObject = this;
+            // 
+            // btnFileDeleted
+            // 
+            this.btnFileDeleted.Location = new System.Drawing.Point(12, 122);
+            this.btnFileDeleted.Name = "btnFileDeleted";
+            this.btnFileDeleted.Size = new System.Drawing.Size(100, 23);
+            this.btnFileDeleted.TabIndex = 18;
+            this.btnFileDeleted.Text = "File Deleted";
+            this.btnFileDeleted.UseVisualStyleBackColor = true;
+            this.btnFileDeleted.Click += new System.EventHandler(this.btnFileDeleted_Click);
+            // 
+            // txtFileToWatch
+            // 
+            this.txtFileToWatch.Location = new System.Drawing.Point(118, 125);
+            this.txtFileToWatch.Name = "txtFileToWatch";
+            this.txtFileToWatch.Size = new System.Drawing.Size(319, 20);
+            this.txtFileToWatch.TabIndex = 19;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(15, 167);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 20;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // btnOpen
+            // 
+            this.btnOpen.Location = new System.Drawing.Point(363, 200);
+            this.btnOpen.Name = "btnOpen";
+            this.btnOpen.Size = new System.Drawing.Size(75, 23);
+            this.btnOpen.TabIndex = 21;
+            this.btnOpen.Text = "Open";
+            this.btnOpen.UseVisualStyleBackColor = true;
+            this.btnOpen.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // btnClose
+            // 
+            this.btnClose.Location = new System.Drawing.Point(362, 229);
+            this.btnClose.Name = "btnClose";
+            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.TabIndex = 22;
+            this.btnClose.Text = "Close";
+            this.btnClose.UseVisualStyleBackColor = true;
+            this.btnClose.Click += new System.EventHandler(this.button6_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(449, 345);
+            this.Controls.Add(this.btnClose);
+            this.Controls.Add(this.btnOpen);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtFileToWatch);
+            this.Controls.Add(this.btnFileDeleted);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.txtDestFile);
             this.Controls.Add(this.button3);
@@ -190,6 +254,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,6 +278,12 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.TextBox txtDestFile;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.TextBox txtFileToWatch;
+        private System.Windows.Forms.Button btnFileDeleted;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnOpen;
+        private System.Windows.Forms.Button btnClose;
     }
 }
 
